@@ -8,8 +8,3 @@ def magic_calculation(a, b):
         return (c)
     else:
         return (sub(a, b))
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Pr
