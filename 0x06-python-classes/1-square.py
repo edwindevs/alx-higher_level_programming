@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-"""A module that declares a private instance variable: 'size'"""
+"""
+A module for working with squares.
+"""
 
 
 class Square:
-    """Square: A class that defines a square."""
-
+    """
+    this rpresents a 2D Polygon
+    with 4 equal and perpendicular sides.
+    """
     def __init__(self, size):
-        """Constructor of the Square class
-        Args:
-            size (int): the size of the square
-        """
-        self.__size = 
+        super().__init__()
+        self.__size = size
