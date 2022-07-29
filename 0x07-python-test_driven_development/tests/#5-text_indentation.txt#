@@ -4,14 +4,16 @@
 >>> text_indentation = import_module('5-text_indentation').text_indentation
 
 # Test for valid arguments
->>> text_indentation('Is there anyone who loves pain itself? \t\t\t          who seeks after it and wants to have it? simply because it is pain?')
+>>> text_indentation('Is there anyone who loves pain itself? \t\t\t          \
+who seeks after it and wants to have it? simply because it is pain?')
 Is there anyone who loves pain itself?
 <BLANKLINE>
 who seeks after it and wants to have it?
 <BLANKLINE>
 simply because it is pain?
 <BLANKLINE>
->>> text_indentation('Is there anyone \n\t\t  who loves pain itself? \t\t\t          who seeks after it and wants to have it? simply because it is pain?')
+>>> text_indentation('Is there anyone \n\t\t  who loves pain itself? \t\t\t    \
+who seeks after it and wants to have it? simply because it is pain?')
 Is there anyone
 who loves pain itself?
 <BLANKLINE>

@@ -1,21 +1,10 @@
 #!/usr/bin/python3
-
-"""
-Contains function that adds two numbers together
-"""
-
-
 def add_integer(a, b=98):
-    """
-    Adds two numbers together
-    Args:
-        a: first number
-        b: second number
-    Returns: an integer, the sum of a and b
-    """
-    if type(a) not in [int, float]:
+    """function that add 2 numbers"""
+
+    if not a or (type(a) != int and type(a) != float):
         raise TypeError("a must be an integer")
-    if type(b) not in [int, float]:
+    if type(b) != int and type(b) != float:
         raise TypeError("b must be an integer")
 
-    return int(a + b)
+    return(int(a) + int(b))

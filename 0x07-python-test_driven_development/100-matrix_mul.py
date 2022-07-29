@@ -1,36 +1,63 @@
 #!/usr/bin/python3
-"""A module thats contains a function that multiplies 2 matrices"""
+'''Contains a get_matrix_size and a matrix_mul'''
+
+
+def get_matrix_sizes(matrix_1, matrix_2, name_1, name_2):
+    '''Computes the size of a matrix and performs some matrix validation.'''
+    funcs = (
+        lambda txt: '{} must be a list'.format(txt),
+        lambda txt: '{} can\'t be empty'.format(txt),
+        lambda txt: '{} must be a list of lists'.format(txt),
+        lambda txt: '{} should contain only integers or floats'.format(txt),
+        lambda txt: 'each row of {} must be of the same size'.format(txt),
+        lambda l: all(map(lambda n: isinstance(n, (int, float)), l)),
+    )
+    size0 = [0, 0]
+    size1 = [0, 0]
+    if not isinstance(matrix_1, list):
+        raise TypeError(funcs[0](name_1))
+    if not isinstance(matrix_2, list):
+        raise TypeError(funcs[0](name_2))
+    size0[0] = len(matrix_1)
+    size1[0] = len(matrix_2)
+    if size0[0] == 0:
+        raise ValueError(funcs[1](name_1))
+    if size1[0] == 0:
+        raise ValueError(funcs[1](name_2))
+    if not all(map(lambda x: isinstance(x, list), matrix_1)):
+        raise TypeError(funcs[2](name_1))
+    if not all(map(lambda x: isinstance(x, list), matrix_2)):
+        raise TypeError(funcs[2](name_2))
+    if all(map(lambda x: len(x) == 0, matrix_1)):
+        raise ValueError(funcs[1](name_1))
+    if all(map(lambda x: len(x) == 0, matrix_2)):
+        raise ValueError(funcs[1](name_2))
+    if not all(map(lambda x: funcs[5](x), matrix_1)):
+        raise TypeError(funcs[3](name_1))
+    if not all(map(lambda x: funcs[5](x), matrix_2)):
+        raise TypeError(funcs[3](name_2))
+    size0[1] = len(matrix_1[0])
+    size1[1] = len(matrix_2[0])
+    if not all(map(lambda x: len(x) == size0[1], matrix_1)):
+        raise TypeError(funcs[4](name_1))
+    if not all(map(lambda x: len(x) == size1[1], matrix_2)):
+        raise TypeError(funcs[4](name_2))
+    return size0, size1
 
 
 def matrix_mul(m_a, m_b):
-    """Multiples two matrices that are conformable"""
-    if type(m_a) is not list:
-        raise TypeError("m_a must be a list")
-    if type(m_b) is not list:
-        raise TypeError("m_b must be a list")
-
-    if not all((isinstance(row, list) for row in m_a)):
-        raise TypeError("m_a must be a list of lists")
-    if not all((isinstance(row, list) for row in m_b)):
-        raise TypeError("m_b must be a list of lists")
-
-    if m_a == [] or m_a == [[]]:
-        raise ValueError("m_a can't be empty")
-    if m_b == [] or m_b == [[]]:
-        raise ValueError("m_b can't be empty")
-
-    if not all((type(x) in [int, float] for row in m_a for x in row)):
-        raise TypeError("m_a should contain only integers or floats")
-    if not all((type(x) in [int, float] for row in m_b for x in row)):
-        raise TypeError("m_b should contain only integers or floats")
-
-    if not all(len(m_a[0]) == len(row) for row in m_a):
-        raise TypeError("each row of m_a must be of the same size")
-    if not all(len(m_b[0]) == len(row) for row in m_b):
-        raise TypeError("each row of m_b must be of the same size")
-
-    if len(m_a[0]) != len(m_b):
-        raise ValueError("m_a and m_b can't be multiplied")
-
-    return [[sum(a * b for a, b in zip(x_row, y_col)) for y_col in zip(*m_b)]
-            for x_row in m_a]
+    '''Multiplies 2 matrices.'''
+    a_sz, b_sz = get_matrix_sizes(m_a, m_b, 'm_a', 'm_b')
+    # AB only works iff column_count in A == row_count in B
+    if a_sz[1] != b_sz[0]:
+        raise ValueError('m_a and m_b can\'t be multiplied')
+    else:
+        res = []
+        for row_a in m_a:
+            row_res = []
+            for i in range(b_sz[1]):
+                cell_args = zip(range(a_sz[1]), row_a)
+                val = map(lambda x: x[1] * m_b[x[0]][i], cell_args)
+                row_res.append(sum(list(val)))
+            res.append(row_res)
+        return res

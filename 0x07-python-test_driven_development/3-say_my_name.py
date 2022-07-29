@@ -1,19 +1,10 @@
 #!/usr/bin/python3
-"""A module that contains a function that prints the full name of a person"""
-
-
 def say_my_name(first_name, last_name=""):
-    """Says the full name of a person
-    Args:
-        first_name (str): the first name provided
-        last_name (str): the last name provided - optional
-    Format of output:
-        My name is <first_name> <last_name>
-    Exceptions:
-        TypeError - If first_name or last_name is not a string
-    """
-    if type(first_name) is not str:
+    """function that prints My name is <first name> <last name>"""
+
+    if not first_name or type(first_name) != str:
         raise TypeError("first_name must be a string")
-    if type(last_name) is not str:
+    elif type(last_name) != str:
         raise TypeError("last_name must be a string")
-    print(f"My name is {first_name} {last_name}")
+
+    print("My name is {} {}".format(first_name, last_name))
