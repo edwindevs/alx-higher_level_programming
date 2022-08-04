@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""
-Contains class that extends list
-"""
+''' Module: 1-my_list
+'''
 
 
 class MyList(list):
-    """
-    Custom list class
-    """
+    ''' Represents a MyList
+    '''
 
     def print_sorted(self):
-        """prints list in ascending order"""
+        '''
+        prints the list, but sorted
+        '''
         print(sorted(self))
