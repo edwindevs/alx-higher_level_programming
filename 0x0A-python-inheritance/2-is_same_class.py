@@ -1,15 +1,7 @@
 #!/usr/bin/python3
-"""
-Contains method that checks whether object is an
-exact instance of a class
-"""
+"""a function"""
 
 
 def is_same_class(obj, a_class):
-    """
-    Checks whether an object is an exact instance of a class
-    Params:
-        obj: the object to check
-        a_class: the class to check
-    """
-    return type(obj) == 
+    """Checks if an object is exactly an instance of the specified class."""
+    return type(obj) is a_class
