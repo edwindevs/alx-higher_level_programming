@@ -1,2 +1,2 @@
--- This script displays lists of databases of your MySQL server
-SHOW DATABASES;
+-- A script to creates a datebase if doesn't already exist
+CREATE DATABASE IF NOT EXISTS hbtn_0c_0;
